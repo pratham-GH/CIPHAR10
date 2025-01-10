@@ -10,7 +10,7 @@ st.title("CIFAR-10 Dataset Classification")
 st.write("Upload an image to get the predicted class using the trained model.")
 
 # File uploader for image input
-uploaded_file = st.file_uploader("Choose an image in the format of (jpg , jpeg)", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Choose an image in the format of cat , deer , truck , dog", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     # Open the uploaded image
