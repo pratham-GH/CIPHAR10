@@ -24,4 +24,4 @@ if uploaded_file is not None:
     prediction = predict_image(image, model)
 
     # Display the prediction result
-    st.success(f"Predicted Class: {prediction}")
+    st.success(f"{prediction}")
