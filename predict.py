@@ -1,22 +1,27 @@
-
-import gradio as gr
+import streamlit as st
 from model import load_model, predict_image
 from PIL import Image
 
+# Load the trained model
 model = load_model('trained_net.pth')
 
-# Gradio interface function
-def gradio_predict(image):
-    return predict_image(image, model)
+# Streamlit app title and description
+st.title("CIFAR-10 Dataset Classification")
+st.write("Upload an image to get the predicted class using the trained model.")
 
-# Create the Gradio interface
-iface = gr.Interface(
-    fn=gradio_predict, 
-    inputs=gr.Image(type="pil"), 
-    outputs="text",
-    title="CIPHAR 10 dataset classification",
-    description="Upload an image to get the predicted class using the trained model." 
-)
+# File uploader for image input
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
-if __name__ == "__main__":
-    iface.launch()
+if uploaded_file is not None:
+    # Open the uploaded image
+    image = Image.open(uploaded_file).convert('RGB')
+
+    # Display the uploaded image
+    st.image(image, caption="Uploaded Image", use_column_width=True)
+
+    # Predict the class using the model
+    st.write("Classifying...")
+    prediction = predict_image(image, model)
+
+    # Display the prediction result
+    st.success(f"Predicted Class: {prediction}")
